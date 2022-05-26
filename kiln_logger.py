@@ -19,7 +19,7 @@ from tkinter import *
 #win = Tk()
 
 #Select the title of the window
-#win.title("Thermocouple Data")
+#win.title("Kiln Device Data")
 
 #Define the geometry of the window
 #win.geometry("800x450+50+50")
