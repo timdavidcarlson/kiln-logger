@@ -19,7 +19,7 @@ from tkinter import *
 #win = Tk()
 
 #Select the title of the window
-#win.title("Kiln Device Data")
+#win.title("Thermocouple Data")
 
 #Define the geometry of the window
 #win.geometry("800x450+50+50")
@@ -88,8 +88,8 @@ zero0=5
 zero1=172.6
 zero2=2031
 #zero7=16273
-scale0=1300   #1340  5/12/2022
-scale1=16.2   #17.2  5/12/2022
+scale0=1470   #1380  7/14/2022
+scale1=16.8   #17.2  5/12/2022
 scale2=100
 #scale7=1700
 #timetable=deque(11*n*[float(1)], 11*n)
@@ -116,6 +116,7 @@ writeline("Time"+","
 #          +"ADC 7 Value"+","
           +"Propane Pressure (PSI) ADC 2"+","
           +"O2 Sensor (AFR Value) ADC 0"+","
+          +"O2 Sensor (Scaled Voltage Value) ADC 0"+","
           ,"/home/pi/Desktop/temp_data_values.csv")
 
 try:
@@ -155,7 +156,8 @@ try:
         adc0valuebuffer.appendleft(OXsignal)
 #        print("\n0 ADC scaled = %.3f"%((OXsignal-zero0)/scale0))
         afr=lookup_afr(round((mean(list(adc0valuebuffer))-zero0)/scale0,3))
-        print("\nvolts = %.3f"%round(round((mean(list(adc0valuebuffer))-zero0)/scale0,3),3))
+        volts=round((mean(list(adc0valuebuffer))-zero0)/scale0,3)
+        print("\nvolts = %.3f"%volts)
         print("AFR = %.3f"%afr)
         
         bars=round(ADC_Value[2]/1000,0)
@@ -189,6 +191,7 @@ try:
 #                  +str("%.3f" %(ADC_Value[2]))+","
                   +str("%.3f" %(round((mean(list(adc2valuebuffer))-zero2)/scale2,3)))+","
                   +str("%.3f" %(afr))+","
+                  +str("%.3f" %(volts))+","
                   ,"/home/pi/Desktop/temp_data_values.csv")
 
         
